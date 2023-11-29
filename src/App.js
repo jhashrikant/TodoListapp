@@ -1,39 +1,14 @@
 
 import './App.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 
 function App() {
-
-
-	// const [tasks, setTasks] = useState(() => {
-	// 	const storedTasks = localStorage.getItem('Tasks');
-	// 	return storedTasks ? JSON.parse(storedTasks) : [];
-	// });
-
 
 	const [tasks, setTasks] = useState([]);
 	const [taskValue, setTaskValue] = useState('')
 	const [isEditing, setIsediting] = useState(false)
 	const [editingvalue, setEditingvalue] = useState(null);
-
-	// const date = new Date();
-	// console.log(typeof date)
-
-	// useEffect(() => {
-	// 	localStorage.setItem('Tasks', JSON.stringify(tasks))
-	// }, [tasks])
-
-
-	// function calculateinitialstate() {
-	// 	const storedtask = localStorage.getItem('Tasks');
-	// 	if (storedtask) {
-	// 		return JSON.parse(storedtask)
-	// 	}
-	// 	else {
-	// 		return []
-	// 	}
-	// }
 
 
 	function handleChange(event) {
@@ -43,23 +18,17 @@ function App() {
 	function handleAddtask() {
 		if (isEditing) {
 			const index = tasks.indexOf(editingvalue)
-			// const editedlist = [...tasks];
-			// editedlist[index] = taskValue
-			// setTasks(editedlist)
-			const updatedtask = [...tasks];
-			updatedtask.splice(index, 1, taskValue)
-			setTasks(updatedtask)
-			// localStorage.setItem( 'Tasks', tasks )
-			// setTasks((prevtask) => {
-			// 	return [...prevtask, prevtask.splice(index, 1, taskValue)]
-			// });
+			if (index !== -1) {
+				const updatedtask = [...tasks];
+				updatedtask.splice(index, 1, taskValue)
+				setTasks(updatedtask)
+			}
 		}
 		else {
 			if (taskValue !== '') {
 				setTasks((prevtask) => [taskValue, ...prevtask]);
 			}
 		}
-		//push the value in the form field to the tasks aray
 		setTaskValue('');
 		setIsediting(false)
 	}
@@ -70,7 +39,6 @@ function App() {
 		const updatedtaskList = tasks.filter((currentelement) => currentelement !== task)
 		console.log(updatedtaskList);
 		setTasks(updatedtaskList);
-		// localStorage.removeItem('Tasks',task);
 	}
 
 
@@ -87,9 +55,6 @@ function App() {
 			handleAddtask()
 		}
 	}
-
-	// const today = new Date();
-	// const formattedDate = today.toDateString();
 
 
 	return (
