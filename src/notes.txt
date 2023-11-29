@@ -1,0 +1,7 @@
+// Example with an array
+const originalArray = [1, 2, 3];
+const modifiedArray = [...originalArray, 4];
+
+// Example with an object
+const originalObject = { key1: 'value1', key2: 'value2' };
+const modifiedObject = { ...originalObject, newKey: 'newValue' };
